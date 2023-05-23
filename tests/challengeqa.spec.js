@@ -12,15 +12,15 @@ const { dManagerDashboard } = require("../pageObjects/dex_manager/dManager_dashb
 
 // Importar funciones reutilizables
 const { FuncionesReutilizables } = require("../utils/funciones");
+
+// Definir horario 
 const date = new Date();
 const hour = date.toLocaleString('es-AR', {hour: '2-digit'});
 const minute = date.toLocaleString('es-AR', {minute: '2-digit'});
 const second = date.toLocaleString('es-AR', {second: '2-digit'});
-
-// Definir hora para las evidencias
 const hora_ejecucion = hour + "." + minute + "." + second;
 
-// Definir el test "Dex Manager - Login"
+
 test("Dex Manager - Login", async({ page }, testInfo) => {
 
   // Crear una instancia de la clase FuncionesReutilizables
@@ -40,7 +40,7 @@ test("Dex Manager - Login", async({ page }, testInfo) => {
   // Esperar a que el botón de inicio de sesión esté visible
   await page.waitForSelector(dexManagerLoginPage.botonIniciarSesion, { state: 'visible' });
 
-  // Capturar una captura de pantalla de la página de inicio de sesión
+  // Captura de pantalla de la página de inicio de sesión
   await funcionesReutilizables.screenshot(nombre_test, hora_ejecucion, "Login page");
 
   // Realizar el inicio de sesión utilizando las credenciales del LoginBuilder
@@ -49,7 +49,7 @@ test("Dex Manager - Login", async({ page }, testInfo) => {
   // Esperar a que el elemento con el selector 'div.circle' esté oculto
   await page.waitForSelector('div.circle', { state: 'hidden' });
 
-  // Capturar una captura de pantalla de la página del dashboard después del inicio de sesión exitoso
+  // Captura de pantalla de la página del dashboard después del inicio de sesión exitoso
   await funcionesReutilizables.screenshot(nombre_test, hora_ejecucion, "Login ok - Dashboard");
 
   // Asegurarse de que el título del dashboard sea visible, lo que indica que el inicio de sesión fue exitoso
